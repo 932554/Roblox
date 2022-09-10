@@ -18,3 +18,5 @@ OldNamecall = hookmetamethod(game, "__namecall", function(self, ...)
     end
     return OldNamecall(self, ...)
 end)
+
+for _, cn in ipairs(getconnections(IdledEvent)) do cn:Disable(); end
