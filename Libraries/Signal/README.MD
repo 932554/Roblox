@@ -5,7 +5,7 @@ Open-source signal library
 
 ## Adding the loadstring to your project
 ```lua
-local Manager = loadstring(game:HttpGet("https://raw.githubusercontent.com/932554/signal/main/SignalManager.lua"))()
+local Manager = loadstring(game:HttpGet("https://raw.githubusercontent.com/932554/Roblox/main/Libraries/Signal/Manager.lua"))()
 ```
 
 ## Initializing the library
@@ -55,7 +55,7 @@ local Signal = Manager.new()
 
 ## Example
 ```lua
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/932554/signal/main/SignalManager.lua"))()
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/932554/Roblox/main/Libraries/Signal/Manager.lua"))()
 
 local Manager = Library.new()
 
@@ -72,7 +72,7 @@ Manager:Destroy(Signal)
 
 ## Example with yielding
 ```lua
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/932554/signal/main/SignalManager.lua"))()
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/932554/Roblox/main/Libraries/Signal/Manager.lua"))()
 
 local Manager = Library.new()
 
