@@ -1,4 +1,4 @@
-local Signal = loadstring(game:HttpGet("https://raw.githubusercontent.com/932554/signal/main/Signal.lua"))()
+local Signal = loadstring(game:HttpGet("https://raw.githubusercontent.com/932554/Roblox/main/Libraries/Signal/Module.lua"))()
 
 local SignalManager = {}
 SignalManager.__index = SignalManager
