@@ -11,7 +11,7 @@ end)
 
 OldNamecall = hookmetamethod(game, "__namecall", function(self, ...)
     local method = getnamecallmethod()
-    if rawequal(self, IdledEvent) and method == "Connect" then
+    if rawequal(self, IdledEvent) and rawequal(method, "Connect") then
         local cn = OldNamecall(self, ...)
         for _, cn in ipairs(getconnections(IdledEvent)) do cn:Disable(); end
         return cn
