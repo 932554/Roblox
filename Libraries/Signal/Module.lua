@@ -80,6 +80,7 @@ do
         self.Destroy = function(self: table)
             self:Disconnect()
             for i in pairs(self) do self[i] = nil; end
+            self = nil
         end
 
         return setmetatable(self, Signal)
