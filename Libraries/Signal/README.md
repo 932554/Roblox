@@ -1,5 +1,5 @@
 # Signal
-Open-source signal library
+Open-source library for creating and using signals.
 
 # Usage
 
