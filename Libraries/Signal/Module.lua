@@ -58,7 +58,7 @@ do
             RunService:BindToRenderStep(taskId,
                 Enum.RenderPriority.First.Value,
                 function(dT)
-                    if fired or timeSize >= timeout then
+                    if fired or (timeSize >= timeout) then
                         RunService:UnbindFromRenderStep(taskId)
                         coroutine.resume(thread)
                     end
