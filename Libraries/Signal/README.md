@@ -5,90 +5,71 @@ Open-source signal library
 
 ## Adding the loadstring to your project
 ```lua
-local Manager = loadstring(game:HttpGet("https://raw.githubusercontent.com/932554/Roblox/main/Libraries/Signal/Manager.lua"))()
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/932554/Roblox/main/Libraries/Signal/Module.lua"))()
 ```
 
-## Initializing the library
+## Creating a new signal
 ```lua
-local Signal = Manager.new()
-```
-
-## Constructing a new signal
-```lua
-<table> Signal:Construct(<string> signalName)
+<table> Library.new(<void>)
 ```
 
 ## Connecting to a signal
 ```lua
-<table> Signal:Connect(<string> signalName, <function> callback)
+<void> Signal:Connect(<function> callback)
 ```
 
 ## Firing a signal
 ```lua
-<void> Signal:Fire(<string> signalName, <any> ...)
+<void> Signal:Fire(<any> ...)
 ```
 
-## Yielding until a signal is fired
+## Waiting until a signal is fired
 ```lua
-<void> Signal:Yield(<string> signalName, <number>? timeout)
+<void> Signal:Wait(<number>? timeout)
 ```
 
 ## Destroying a signal
 ```lua
-<void> Signal:Destroy(<table> signal)
-```
-
-## Destroying all signals
-```lua
-<void> Signal:DestroyAll(<void>)
+<void> Signal:Destroy(<void>)
 ```
 
 ## Disconnecting a signal
 ```lua
-<void> Signal:Disconnect(<table> signal) -- can also put the signal name here
-```
-
-## Disconnecting all signals
-```lua
-<void> Signal:DisconnectAll(<void>)
+<void> Signal:Disconnect(<void>)
 ```
 
 ## Example
 ```lua
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/932554/Roblox/main/Libraries/Signal/Manager.lua"))()
 
-local Manager = Library.new()
+local Signal = Library.new()
 
-local Signal = Manager:Construct("Print") -- using "Print" as the signal name
+Signal:Connect(print) -- printing the data that is fired.
 
-local Connection = Manager:Connect(Signal, print) -- connecting to "Print" and printing the data (can also use signal name here)
+Signal:Fire(("Signal '%s' has been fired"):format(Signal.Id))
 
-Manager:Fire(Signal, "This will be printed to the dev console.") -- can also use the signal name here
+Signal:Disconnect()
 
-Manager:Disconnect(Connection) -- Manager:Disconnect("Print")
-
-Manager:Destroy(Signal)
+Signal:Destroy() -- if this is called, it will automatically call Signal.Disconnect
 ```
 
 ## Example with yielding
 ```lua
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/932554/Roblox/main/Libraries/Signal/Manager.lua"))()
 
-local Manager = Library.new()
+local Signal = Library.new()
 
-local Signal = Manager:Construct("Print") -- using "Print" as the signal name
+Signal:Connect(print) -- printing the data that is fired.
 
-local Connection = Manager:Connect(Signal, print) -- connecting to "Print" and printing the data (can also use signal name here)
-
-task.delay(5, function() -- wait 5 seconds then fire the signal
-    Manager:Fire(Signal, "This will be printed to the dev console.") -- can also use the signal name here
+task.delay(3, function() -- wait 3 seconds then fire (using for the wait example)
+    Signal:Fire(("Signal '%s' has been fired"):format(Signal.Id))
 end)
 
-Manager:Yield(Signal) -- Yield the thread until "Print" is fired (can also use the signal name here)
+Signal:Wait() -- wait until the signal has been fired
 
-warn("Signal has been fired")
+warn("After waiting")
 
-Manager:Disconnect(Connection) -- Manager:Disconnect("Print")
+Signal:Disconnect()
 
-Manager:Destroy(Signal)
+Signal:Destroy() -- if this is called, it will automatically call Signal.Disconnect
 ```
