@@ -28,7 +28,7 @@ do
         self.Connections = {}
 
         self.Connect = function(self: table, callback)
-            assert(typeof(callback) == "function",
+            assert(type(callback) == "function",
                 string.format("Bad argument #1 for 'Connect' (function expected, got %s)",
                 typeof(callback)))
 
