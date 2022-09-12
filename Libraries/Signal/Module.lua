@@ -12,10 +12,11 @@ do
         return setmetatable(self, Connection)
     end
 
-    function Connection.Disconnect(self)
+    function Connection.Disconnect(self: table)
         local connections = self.Signal.Connections
         table.remove(connections, table.find(connections, self))
     end
+    Connection.disconnect = Connection.Disconnect
 end
 
 local Signal = {}
@@ -48,7 +49,7 @@ do
             timeout = timeout or math.huge
 
             local fired = false
-            local connection = self:Connect(function(...)
+            local connection = self:Connect(function()
                 fired = true
             end)
 
