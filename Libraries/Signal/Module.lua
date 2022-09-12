@@ -47,10 +47,8 @@ do
         self.Wait = function(self: table, timeout: number)
             timeout = timeout or math.huge
 
-            local t = {}
             local fired = false
             local connection = self:Connect(function(...)
-                t = {...}
                 fired = true
             end)
 
@@ -69,8 +67,6 @@ do
             coroutine.yield()
 
             pcall(connection.Disconnect, connection)
-
-            return unpack(t)
         end
         self.wait = self.Wait
 
