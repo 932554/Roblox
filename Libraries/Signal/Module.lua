@@ -27,6 +27,10 @@ do
         self.Connections = {}
 
         self.Connect = function(self: table, callback)
+            assert(typeof(callback) == "function",
+                string.format("Bad argument #1 for 'Connect' (function expected, got %s)",
+                typeof(callback)))
+
             local connection = Connection.new(self, callback)
             self.Connections[#self.Connections + 1] = connection
             return connection
@@ -75,9 +79,7 @@ do
 
         self.Destroy = function(self: table)
             self:Disconnect()
-            for i in pairs(Signal) do
-                if i.Id == self.Id then Signal[i] = nil; end
-            end
+            for i in pairs(self) do self[i] = nil; end
         end
 
         return setmetatable(self, Signal)
