@@ -35,18 +35,21 @@ do
             self.Connections[#self.Connections + 1] = connection
             return connection
         end
+        self.connect = self.Connect
 
         self.Disconnect = function(self: table)
             for _, connection in pairs(self.Connections) do
                 pcall(connection.Disconnect, connection)
             end
         end
+        self.disconnect = self.Disconnect
 
         self.Fire = function(self: table, ...)
             for _, connection in pairs(self.Connections) do
                 task.spawn(connection.Callback, ...)
             end
         end
+        self.fire = self.Fire
 
         self.Wait = function(self: table, timeout: number)
             timeout = timeout or math.huge
@@ -76,12 +79,14 @@ do
 
             return unpack(t)
         end
+        self.wait = self.Wait
 
         self.Destroy = function(self: table)
             self:Disconnect()
             for i in pairs(self) do self[i] = nil; end
             self = nil
         end
+        self.destroy = self.Destroy
 
         return setmetatable(self, Signal)
     end
