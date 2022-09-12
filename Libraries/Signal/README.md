@@ -15,7 +15,7 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/93255
 
 ## Connecting to a signal
 ```lua
-<void> Signal:Connect(<function> callback)
+<table> Signal:Connect(<function> callback)
 ```
 
 ## Disconnecting a connection
