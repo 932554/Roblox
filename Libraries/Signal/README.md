@@ -40,7 +40,7 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/93255
 
 ## Example
 ```lua
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/932554/Roblox/main/Libraries/Signal/Manager.lua"))()
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/932554/Roblox/main/Libraries/Signal/Module.lua"))()
 
 local Signal = Library.new()
 
@@ -55,7 +55,7 @@ Signal:Destroy() -- if this is called, it will automatically call Signal.Disconn
 
 ## Example with yielding
 ```lua
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/932554/Roblox/main/Libraries/Signal/Manager.lua"))()
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/932554/Roblox/main/Libraries/Signal/Module.lua"))()
 
 local Signal = Library.new()
 
