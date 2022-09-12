@@ -25,7 +25,7 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/93255
 
 ## Firing a signal
 ```lua
-<void> Signal:Fire(<any> ...)
+<void> Signal:Fire(<any>? ...)
 ```
 
 ## Waiting until a signal is fired
