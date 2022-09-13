@@ -12,11 +12,11 @@ do
         return setmetatable(self, Connection)
     end
 
-    function Connection.Disconnect(self: table)
+    function Connection.disconnect(self: table)
         local connections = self.Signal.Connections
         table.remove(connections, table.find(connections, self))
     end
-    Connection.disconnect = Connection.Disconnect
+    Connection.Disconnect = Connection.disconnect
 end
 
 local Signal = {}
@@ -27,7 +27,7 @@ do
         self.Id = HttpService:GenerateGUID(false)
         self.Connections = {}
 
-        self.Connect = function(self: table, callback)
+        self.connect = function(self: table, callback)
             assert(type(callback) == "function",
                 string.format("Bad argument #1 for 'Connect' (function expected, got %s)",
                 typeof(callback)))
@@ -36,16 +36,16 @@ do
             self.Connections[#self.Connections + 1] = connection
             return connection
         end
-        self.connect = self.Connect
+        self.Connect = self.connect
 
-        self.Fire = function(self: table, ...)
+        self.fire = function(self: table, ...)
             for _, connection in pairs(self.Connections) do
                 task.spawn(connection.Callback, ...)
             end
         end
-        self.fire = self.Fire
+        self.Fire = self.fire
 
-        self.Wait = function(self: table, timeout: number)
+        self.wait = function(self: table, timeout: number)
             timeout = timeout or math.huge
 
             local fired = false
@@ -69,14 +69,14 @@ do
 
             pcall(connection.Disconnect, connection)
         end
-        self.wait = self.Wait
+        self.Wait = self.wait
 
-        self.Destroy = function(self: table)
+        self.destroy = function(self: table)
             for _, v in pairs(self.Connections) do v:Disconnect(); end
             for i in pairs(self) do self[i] = nil; end
             self = nil
         end
-        self.destroy = self.Destroy
+        self.Destroy = self.destroy
 
         return setmetatable(self, Signal)
     end
