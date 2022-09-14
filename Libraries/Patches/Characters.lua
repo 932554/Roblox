@@ -47,6 +47,18 @@ do
         local health = self.get(self, player, "Health")
         return health, FindFirstChild(health, "MaxHealth")
     end
+
+    function Patcher.getHitboxes(self: table, character)
+        if table.find(self.Games["Bad Business"], game.PlaceId) then -- bad business
+            local hitboxes = FindFirstChild(character, "Body")
+            return {
+                Root = FindFirstChild(character, "Root"),
+                Head = FindFirstChild(hitboxes, "Head"),
+                
+            }
+        end
+
+    end
 end
 
 return Patcher
