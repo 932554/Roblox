@@ -45,7 +45,7 @@ do
 
     function Patcher.getHealth(self: table, player)
         local health = self.get(self, player, "Health")
-        return health, FindFirstChild(health, "MaxHealth")
+        return health.Value, FindFirstChild(health, "MaxHealth").Value
     end
 
     function Patcher.getHitboxes(self: table, character)
@@ -54,7 +54,7 @@ do
             return {
                 Root = FindFirstChild(character, "Root"),
                 Head = FindFirstChild(hitboxes, "Head"),
-                
+
             }
         end
 
