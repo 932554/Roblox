@@ -1,4 +1,5 @@
 -- Module: Patcher
+-- Description: Library to manage game specific patches.
 -- Author: 932554
 
 local Players = game:GetService("Players")
@@ -43,7 +44,8 @@ do
     end
 
     function Patcher.getHealth(self: table, player)
-        return self.get(self, player, "Health")
+        local health = self.get(self, player, "Health")
+        return health, FindFirstChild(health, "MaxHealth")
     end
 end
 
