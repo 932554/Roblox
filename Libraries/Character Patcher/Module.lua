@@ -2,6 +2,7 @@
 -- Description: A library to help make scripts for games which use custom characters
 -- Author: 932554
 -- Supported: Bad Business, and all games which use Player.Character (more coming soon)
+-- Supported Rig Types: R15, R6
 
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Teams = game:GetService("Teams")
