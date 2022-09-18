@@ -1,5 +1,20 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
+-- // Auxiliary \\ --
+
+local function FindFirstChild(p, c)
+    local s, o = pcall(function() return p[c]; end)
+    if s and o then return o; end
+end
+
+local function FindFirstChildOfClass(p, c)
+    for _, v in ipairs(p:GetChildren()) do
+        if v.ClassName == c then return v; end
+    end
+end
+
+-- // Library \\ --
+
 local Patcher = loadstring(game:HttpGet("https://raw.githubusercontent.com/932554/Roblox/main/Libraries/Character%20Patcher/Patcher/Module.lua"))()
 do
     local ts = require(ReplicatedStorage.TS)
