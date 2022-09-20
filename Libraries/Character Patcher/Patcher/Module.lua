@@ -20,7 +20,10 @@ do -- default methods will work for most games
     end
     Patcher.GetCharacter = Patcher.getCharacter
 
-    function Patcher.getHealth(char)
+    function Patcher.getHealth(player)
+        local char = Patcher.getPlayerCharacter(player)
+        if not char then return; end
+
         local hum = FindFirstChildOfClass(char, "Humanoid")
         return hum.Health or 0, hum.MaxHealth or 100
     end
