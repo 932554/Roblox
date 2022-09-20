@@ -1,5 +1,5 @@
--- Name: Phantom Forces Patch
--- Description: A custom character fix for Phantom Forces
+-- Name: Bad Business Patch
+-- Description: A custom character fix for Bad Business
 -- Author: 932554
 
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
