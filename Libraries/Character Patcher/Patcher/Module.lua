@@ -21,7 +21,7 @@ do -- default methods will work for most games
     Patcher.GetCharacter = Patcher.getCharacter
 
     function Patcher.getHealth(player)
-        local char = Patcher.getPlayerCharacter(player)
+        local char = Patcher.getCharacter(player)
         if not char then return; end
 
         local hum = FindFirstChildOfClass(char, "Humanoid")
