@@ -28,7 +28,7 @@ do -- default methods will work for most games
 
     function Patcher.getCharacterBodyParts(char)
         return { -- kinda aids but whatever (also if someone knows a better way to do this pls let me know)
-            PrimaryPart = char.PrimaryPart or
+            Root = char.PrimaryPart or
                 FindFirstChild(char, "HumanoidRootPart"),
 
             Head = FindFirstChild(char, "Head"),
