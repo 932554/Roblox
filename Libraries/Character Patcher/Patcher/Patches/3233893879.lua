@@ -25,12 +25,12 @@ do
     local ts = require(ReplicatedStorage.TS)
     local characters = debug.getupvalue(ts.Characters.GetCharacter, 1)
 
-    Patcher.getPlayerCharacter = function(player)
+    Patcher.getCharacter = function(player)
         return characters[player]
     end
-    Patcher.GetPlayerCharacter = Patcher.getPlayerCharacter
+    Patcher.GetCharacter = Patcher.getCharacter
 
-    Patcher.getPlayerHealth = function(player)
+    Patcher.getHealth = function(player)
         local char = Patcher.getPlayerCharacter(player)
         if not char then return; end
 
@@ -40,9 +40,9 @@ do
 
         return health.Value, maxHealth.Value
     end
-    Patcher.GetPlayerHealth = Patcher.getPlayerHealth
+    Patcher.GetHealth = Patcher.getHealth
 
-    Patcher.getCharacterBodyParts = function(char)
+    Patcher.getBodyParts = function(char)
         local body = FindFirstChild(char, "Body")
         if not body then return; end
         return {
@@ -66,16 +66,16 @@ do
             RightLowerLeg = FindFirstChild(body, "RightForeleg"),
         }
     end
-    Patcher.GetCharacterBodyParts = Patcher.getCharacterBodyParts
+    Patcher.GetBodyParts = Patcher.getBodyParts
 
-    Patcher.getPlayerTeam = function(player)
+    Patcher.getTeam = function(player)
         for _, v in ipairs(Teams:GetChildren()) do
             if FindFirstChild(v.Players, player.Name) then
                 return v
             end
         end
     end
-    Patcher.GetPlayerTeam = Patcher.getPlayerTeam
+    Patcher.GetTeam = Patcher.getTeam
 end
 
 return Patcher
