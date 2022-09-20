@@ -31,7 +31,7 @@ do
     Patcher.GetCharacter = Patcher.getCharacter
 
     Patcher.getHealth = function(player)
-        local char = Patcher.getPlayerCharacter(player)
+        local char = Patcher.getCharacter(player)
         if not char then return; end
 
         local health = FindFirstChild(char, "Health")
