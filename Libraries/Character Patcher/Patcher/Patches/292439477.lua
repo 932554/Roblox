@@ -24,19 +24,19 @@ do
     local clientManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/Stefanuk12/ROBLOX/master/Games/Phantom%20Forces/ClientManager.lua"))()
     local client = clientManager.new()
 
-    Patcher.getPlayerCharacter = function(player)
+    Patcher.getCharacter = function(player)
         local parts = client.Characters[player]
         return parts and parts.Torso.Parent
     end
-    Patcher.GetPlayerCharacter = Patcher.getPlayerCharacter
+    Patcher.GetCharacter = Patcher.getCharacter
 
-    Patcher.getPlayerHealth = function(player)
+    Patcher.getHealth = function(player)
         local health, maxHealth = client.hud:getplayerhealth(player)
         return health, maxHealth
     end
-    Patcher.GetPlayerHealth = Patcher.getPlayerHealth
+    Patcher.GetHealth = Patcher.getHealth
 
-    Patcher.getCharacterBodyParts = function(char)
+    Patcher.getBodyParts = function(char)
         return {
             Root = FindFirstChild(char, "Torso"),
 
@@ -58,11 +58,11 @@ do
             RightLowerLeg = FindFirstChild(char, "Left Leg"),
         }
     end
-    Patcher.GetCharacterBodyParts = Patcher.getCharacterBodyParts
+    Patcher.GetBodyParts = Patcher.getBodyParts
 
-    Patcher.getPlayerTeam = function(player)
+    Patcher.getTeam = function(player)
     end
-    Patcher.GetPlayerTeam = Patcher.getPlayerTeam
+    Patcher.GetTeam = Patcher.getTeam
 end
 
 return Patcher
