@@ -30,7 +30,7 @@ do
     end
     Patcher.GetPlayerCharacter = Patcher.getPlayerCharacter
 
-    Patcher.gePlayerHealth = function(player)
+    Patcher.getPlayerHealth = function(player)
         local health, maxHealth = client.hud:getplayerhealth(player)
         return health, maxHealth
     end
