@@ -1,8 +1,9 @@
--- Name: Bad Business Patch
--- Description: A custom character fix for Bad Business
+-- Name: Phantom Forces Patch
+-- Description: A custom character fix for Phantom Forces
 -- Author: 932554
 
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Teams = game:GetService("Teams")
 
 -- // Auxiliary \\ --
 
@@ -24,25 +25,28 @@ do
     local ts = require(ReplicatedStorage.TS)
     local characters = debug.getupvalue(ts.Characters.GetCharacter, 1)
 
-    Patcher.getCharacter = function(player)
+    Patcher.getPlayerCharacter = function(player)
         return characters[player]
     end
-    Patcher.GetCharacter = Patcher.getCharacter
+    Patcher.GetPlayerCharacter = Patcher.getPlayerCharacter
 
-    Patcher.getHealth = function(char)
+    Patcher.getPlayerHealth = function(player)
+        local char = Patcher.getPlayerCharacter(player)
+        if not char then return; end
+
         local health = FindFirstChild(char, "Health")
         local maxHealth = FindFirstChild(health, "MaxHealth")
         if not health or not maxHealth then return; end
 
         return health.Value, maxHealth.Value
     end
-    Patcher.GetHealth = Patcher.getHealth
+    Patcher.GetPlayerHealth = Patcher.getPlayerHealth
 
-    Patcher.getBodyParts = function(char)
+    Patcher.getCharacterBodyParts = function(char)
         local body = FindFirstChild(char, "Body")
         if not body then return; end
         return {
-            PrimaryPart = FindFirstChild(char, "Root"),
+            Root = FindFirstChild(char, "Root"),
 
             Head = FindFirstChild(body, "Head"),
 
@@ -62,16 +66,16 @@ do
             RightLowerLeg = FindFirstChild(body, "RightForeleg"),
         }
     end
-    Patcher.GetBodyParts = Patcher.getBodyParts
+    Patcher.GetCharacterBodyParts = Patcher.getCharacterBodyParts
 
-    Patcher.getTeam = function(player)
+    Patcher.getPlayerTeam = function(player)
         for _, v in ipairs(Teams:GetChildren()) do
             if FindFirstChild(v.Players, player.Name) then
                 return v
             end
         end
     end
-    Patcher.GetTeam = Patcher.getTeam
+    Patcher.GetPlayerTeam = Patcher.getPlayerTeam
 end
 
 return Patcher
