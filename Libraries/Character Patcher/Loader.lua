@@ -3,7 +3,7 @@
 -- Author: 932554
 
 do
-    local found, patcher = pcall(game.HttpGet, game, string.format("%s/%s.lua", "https://github.com/932554/Roblox/tree/main/Libraries/Character%20Patcher/Patcher/Patches", game.PlaceId))
+    local found, patcher = pcall(game.HttpGet, game, string.format("%s/%s.lua", "https://raw.githubusercontent.com/932554/Roblox/main/Libraries/Character%20Patcher/Patcher/Patches", game.PlaceId))
     if not found or not patcher then
         patcher = game:HttpGet("https://raw.githubusercontent.com/932554/Roblox/main/Libraries/Character%20Patcher/Patcher/Module.lua")
     end
