@@ -15,18 +15,18 @@ end
 
 local Patcher = {}
 do -- default methods will work for most games
-    function Patcher.getCharacter(player)
+    function Patcher.getPlayerCharacter(player)
         return (player.ClassName == "Model" and player) or player.Character
     end
-    Patcher.GetCharacter = Patcher.getCharacter
+    Patcher.GetPlayerCharacter = Patcher.getPlayerCharacter
 
-    function Patcher.getHealth(char)
+    function Patcher.getPlayerHealth(char)
         local hum = FindFirstChildOfClass(char, "Humanoid")
         return hum.Health or 0, hum.MaxHealth or 100
     end
-    Patcher.GetHealth = Patcher.getHealth
+    Patcher.GetPlayerHealth = Patcher.getPlayerHealth
 
-    function Patcher.getBodyParts(char)
+    function Patcher.getCharacterBodyParts(char)
         return { -- kinda aids but whatever (also if someone knows a better way to do this pls let me know)
             PrimaryPart = char.PrimaryPart or
                 FindFirstChild(char, "HumanoidRootPart"),
@@ -59,12 +59,12 @@ do -- default methods will work for most games
                 FindFirstChild(char, "Right Leg")
         }
     end
-    Patcher.GetBodyParts = Patcher.getBodyParts
+    Patcher.GetCharacterBodyParts = Patcher.getCharacterBodyParts
 
-    function Patcher.getTeam(player)
+    function Patcher.getPlayerTeam(player)
         return player.Team
     end
-    Patcher.GetTeam = Patcher.getTeam
+    Patcher.GetPlayerTeam = Patcher.getPlayerTeam
 end
 
 return Patcher
