@@ -10,32 +10,32 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/93255
 
 ## Creating a new signal
 ```lua
-<table> Library.new(<void>)
+Library.new(): table
 ```
 
 ## Connecting to a signal
 ```lua
-<table> Signal:Connect(<function> callback)
+Signal:Connect(callback: function): table
 ```
 
 ## Disconnecting a connection
 ```lua
-<void> Connection:Disconnect(<void>)
+Connection:Disconnect(): nil
 ```
 
 ## Firing a signal
 ```lua
-<void> Signal:Fire(<any>? ...)
+Signal:Fire(...?: any): nil
 ```
 
 ## Waiting until a signal is fired
 ```lua
-<void> Signal:Wait(<number>? timeout)
+Signal:Wait(timeout?: number): nil
 ```
 
 ## Destroying a signal
 ```lua
-<void> Signal:Destroy(<void>)
+Signal:Destroy(): nil
 ```
 
 ## Example
