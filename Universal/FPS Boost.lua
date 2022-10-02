@@ -1,52 +1,61 @@
-if not game:IsLoaded() then game.Loaded:Wait(); end
+local Players = game:GetService("Players")
+local Lighting = game:GetService("Lighting")
 
-assert(setfpscap, "bad exploit")
-assert(sethiddenproperty, "bad exploit")
+-- // Auxiliary \\ --
 
-setfpscap(300)
+local function IsDescendantOfCharacter(inst)
+    for _, v in ipairs(Players:GetPlayers()) do
+        local char = v.Character
+        if char and inst:IsDescendantOf(char) then
+            return true
+        end
+    end
+    return false
+end
 
-local lighting = game:GetService("Lighting")
-lighting.Brightness = 1
+local function OptimizeInst(inst)
+    if not IsDescendantOfCharacter(inst) then
+        if inst:IsA("DataModelMesh") then
+            sethiddenproperty(inst, "LODX", Enum.LevelOfDetailSetting.Low)
+            sethiddenproperty(inst, "LODY", Enum.LevelOfDetailSetting.Low)
+        elseif inst:IsA("FaceInstance") then
+            inst.Shiny = 1
+        elseif inst:IsA("ParticleEmitter") or
+            inst:IsA("Trail") or inst:IsA("Smoke") or
+            inst:IsA("Fire") or inst:IsA("Sparkles") or
+            inst:IsA("PostEffect") then
+            inst.Enabled = false
+        elseif inst:IsA("Explosion") then
+            inst.Visible = false
+        elseif inst:IsA("BasePart") then
+            inst.Material = Enum.Material.Plastic
+            inst.Reflectance = 0
+        elseif inst:IsA("Model") then
+            sethiddenproperty(inst, "LevelOfDetail", 1)
+        end
+    end
+end
 
-local sky = lighting:FindFirstChildOfClass("Sky")
-if sky then sky.StarCount = 0; end
+-- // Main \\ --
 
-sethiddenproperty(lighting, "Technology", Enum.Technology.Voxel)
-
-local terrain = workspace:FindFirstChildOfClass("Terrain")
-terrain.WaterWaveSize = 0
-terrain.WaterWaveSpeed = 0
-terrain.WaterReflectance = 0
-terrain.WaterTransparency = 0
-
-sethiddenproperty(terrain, "Decoration", false)
-
-settings().Rendering.QualityLevel = 2
-settings().Network.IncomingReplicationLag = -1000
+settings().Rendering.QualityLevel = Enum.QualityLevel.Level01
 settings().Rendering.EagerBulkExecution = false
 
-for _, v in ipairs(lighting:GetChildren()) do
-    if v:IsA("BloomEffect") or v:IsA("SunRaysEffect") or v:IsA("ColorCorrectionEffect") or v:IsA("BlurEffect") then
-        v.Enabled = false
-    end
+local Sky = Lighting:FindFirstChildOfClass("Sky")
+if Sky then Sky.StarCount = 0; end
+
+local Terrain = workspace:FindFirstChildOfClass("Terrain")
+if Terrain then
+    sethiddenproperty(Terrain, "Decoration", false)
+
+    Terrain.WaterWaveSize = 0
+    Terrain.WaterWaveSpeed = 0
+    Terrain.WaterReflectance = 0
+    Terrain.WaterTransparency = 0
 end
 
-for _, v in ipairs(workspace:GetDescendants()) do
-    if v:IsA("BasePart") and not v.Parent:FindFirstChild("HumanoidRootPart") and not v.Parent:IsA("Tool") then
-        v.Material = Enum.Material.Plastic
-        v.Reflectance = 0
-    elseif v:IsA("DataModelMesh") then
-        sethiddenproperty(v, "LODX", Enum.LevelOfDetailSetting.Low)
-        sethiddenproperty(v, "LODY", Enum.LevelOfDetailSetting.Low)
-    end
-end
+for _, inst in ipairs(workspace:GetDescendants()) do OptimizeInst(inst); end
+workspace.DescendantAdded:Connect(OptimizeInst)
 
-workspace.DescendantAdded:Connect(function(inst)
-    if inst:IsA("BasePart") and not inst.Parent:FindFirstChild("HumanoidRootPart") and not inst.Parent:IsA("Tool") then
-        inst.Material = Enum.Material.Plastic
-        inst.Reflectance = 0
-    elseif inst:IsA("DataModelMesh") then
-        sethiddenproperty(inst, "LODX", Enum.LevelOfDetailSetting.Low)
-        sethiddenproperty(inst, "LODY", Enum.LevelOfDetailSetting.Low)
-    end
-end)
+for _, inst in ipairs(Lighting:GetDescendants()) do OptimizeInst(inst); end
+Lighting.DescendantAdded:Connect(OptimizeInst)
