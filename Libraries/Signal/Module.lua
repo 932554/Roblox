@@ -49,7 +49,9 @@ do
             timeout = timeout or math.huge
 
             local fired = false
-            local connection = self:Connect(function()
+            local connection; 
+            connection = self:Connect(function()
+                pcall(connection.Disconnect, connection)
                 fired = true
             end)
 
@@ -66,8 +68,6 @@ do
                 end
             )
             coroutine.yield()
-
-            pcall(connection.Disconnect, connection)
         end
         self.Wait = self.wait
 
